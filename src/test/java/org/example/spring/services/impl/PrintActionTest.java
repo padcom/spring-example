@@ -2,6 +2,7 @@ package org.example.spring.services.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import org.example.spring.services.Formatter;
 import org.example.spring.services.Printer;
 import org.example.spring.services.Action;
 import org.junit.Test;
@@ -13,9 +14,9 @@ public class PrintActionTest {
 	
 	@Test
 	public void should_properly_process_the_given_data() {
-		Action processor = new PrintAction(mockPrinter());
+		Action processor = new PrintAction(mockPrinter(), mockFormatter());
 		processor.execute(HELLO_WORLD);
-		assertEquals("The message is " + HELLO_WORLD, msg);
+		assertEquals(HELLO_WORLD, msg);
 	}
 
 	private Printer mockPrinter() {
@@ -26,4 +27,14 @@ public class PrintActionTest {
 			}
 		};
 	}
+
+	private Formatter mockFormatter() {
+		return new Formatter() {
+			@Override
+			public String format(String template, Object... params) {
+				return (String) params[0];
+			}
+		};
+	}
+
 }
