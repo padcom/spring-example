@@ -1,2 +1,2 @@
 @echo off
-call mvn.bat package appassembler:assemble
+call mvn.bat clean package appassembler:assemble
