@@ -8,6 +8,35 @@
 	<packaging>jar</packaging>
 
 	<name>Spring examples :: Console application</name>
+	<url>https://github.com/padcom/spring-example</url>
+	
+	<scm>
+		<connection>scm:git:git://github.com/padcom/spring-example</connection>
+		<developerConnection>scm:git:https://github.com/padcom/spring-example</developerConnection>
+		<url>https://github.com/padcom/spring-example</url>
+	</scm>
+
+	<ciManagement>
+		<system>Hudson</system>
+		<url>http://hudson.testdriven.org/job/spring-example</url>
+	</ciManagement>
+
+	<licenses>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE V2.1</name>
+			<url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>padcom</id>
+			<name>Matthias Hryniszak</name>
+			<email>padcom@gmail.com</email>
+			<timezone>CET</timezone>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
