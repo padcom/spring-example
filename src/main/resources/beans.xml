@@ -17,6 +17,11 @@
 	<context:component-scan base-package="org.example.spring.services" />
 
 	<!-- This bean is configurable so it is specified directly in the XML configuration -->
+	<bean id="configuration" class="org.example.spring.Configuration">
+		<property name="title" value="${title}"/>
+	</bean>
+
+	<!-- This bean is configurable so it is specified directly in the XML configuration -->
 	<bean id="printer" class="org.example.spring.services.impl.PrefixedPrinter">
 		<property name="prefix" value="${prefix}" />
 	</bean>
