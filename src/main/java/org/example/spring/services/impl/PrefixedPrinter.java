@@ -16,12 +16,12 @@ public class PrefixedPrinter implements Printer {
 		this.prefix = prefix;
 	}
 
-	public String getMessage() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setMessage(String message) {
-		this.title = message;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	@Override
