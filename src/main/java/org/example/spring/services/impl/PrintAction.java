@@ -10,11 +10,13 @@ import org.example.spring.services.Printer;
 /**
  * This is some example action class. All it does is it uses a formatter to dump the input
  * 
- * It uses the JSR-330 annotations to stay IoC container agnostic
+ * It uses the JSR-330 annotations to stay IoC container agnostic.
+ * The default bean name is derived from class name with the first letter lower-case
+ * so "PrintAction" becomes "printAction" bean instance   
  * 
  * @author Matthias Hryniszak
  */
-@Named("print-action")
+@Named 
 public class PrintAction implements Action {
 	private final Printer printer;
 	private final Formatter formatter;
