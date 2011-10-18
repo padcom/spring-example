@@ -33,4 +33,6 @@
 	<bean id="printer" class="org.example.spring.services.impl.PrefixedPrinter">
 		<property name="prefix" value="${prefix}" />
 	</bean>
+
+	<import resource="example.config.xml" />
 </beans>
