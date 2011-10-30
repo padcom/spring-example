@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:hz="http://www.hazelcast.com/schema/config"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.hazelcast.com/schema/config http://www.hazelcast.com/schema/config/hazelcast-spring.xsd"
+           default-autowire="constructor">
+
+	<context:component-scan base-package="org.example.spring.services.impl" />
+
+	<bean id="configuration" class="org.example.spring.services.impl.Configuration">
+		<property name="value1" value="value of value1" />
+		<property name="value2" value="value of value2" />
+	</bean>
+
+	<!-- Method 1: with all default values -->
+	<hz:hazelcast id="hazelcast1">
+		<hz:config />
+	</hz:hazelcast>
+
+	<!-- Method 2: with some values overriden (like group credentials and logging framework) -->
+	<hz:hazelcast id="hazelcast2">
+		<hz:config>
+			<hz:group name="dev" password="dev-pass"/>
+            <hz:properties>
+            	<hz:property name="hazelcast.logging.type">log4j</hz:property>
+            </hz:properties>
+		</hz:config>
+	</hz:hazelcast>
+
+	<bean id="read-action" class="org.example.spring.services.impl.ReadDateFromCacheAction">
+		<constructor-arg><hz:map instance-ref="hazelcast1" name="values" /></constructor-arg>
+	</bean>
+
+	<bean id="write-action" class="org.example.spring.services.impl.StoreDateInCacheAction">
+		<constructor-arg><hz:map instance-ref="hazelcast2" name="values" /></constructor-arg>
+		<constructor-arg ref="dateFormat" />
+	</bean>
+	
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd HH:mm:ss.SSS"/>
+	</bean>
+</beans>

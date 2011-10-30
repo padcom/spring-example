@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:spring="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:http="http://www.mulesoft.org/schema/mule/http"
+       xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio"
+       xmlns:multicast="http://www.mulesoft.org/schema/mule/multicast"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.1/mule.xsd
+       http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.1/mule-http.xsd
+       http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/3.1/mule-stdio.xsd
+       http://www.mulesoft.org/schema/mule/multicast http://www.mulesoft.org/schema/mule/multicast/3.1/mule-multicast.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:property-placeholder location="classpath:example.properties" />
+
+	<multicast:connector name="connector"/>
+
+    <flow name="main">
+    	<http:inbound-endpoint host="localhost" port="2222" path="input" keep-alive="true"/>
+    	<echo-component/>
+		<multicast:outbound-endpoint host="224.0.0.0" port="5555" exchange-pattern="one-way" />
+    </flow>
+
+    <flow name="recv">
+		<multicast:inbound-endpoint host="224.0.0.0" port="5555"/>
+    	<echo-component/>
+    	<stdio:outbound-endpoint system="OUT"/>
+    </flow>
+</mule>

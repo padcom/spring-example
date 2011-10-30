@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:hz="http://www.hazelcast.com/schema/config"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.hazelcast.com/schema/config http://www.hazelcast.com/schema/config/hazelcast-spring.xsd">
+
+	<!-- Overrides come first - default location is /etc/example.properties -->
+	<!-- To use another configuration file specify it like this: -Dexample.properties=C:/some_location/example.properties-->
+	<context:property-placeholder location="file:///${example.properties:etc/example.properties}" order="1" ignore-resource-not-found="true" ignore-unresolvable="true" />
+	<!-- Default property values -->
+	<context:property-placeholder location="classpath:example.properties" order="2" />
+
+	<!-- Component scan instead of manually specifying all the beans -->
+	<context:component-scan base-package="org.example.spring.services" />
+
+	<!-- This bean is configurable so it is specified directly in the XML configuration -->
+	<bean id="configuration" class="org.example.spring.Configuration">
+		<property name="title" value="${title}"/>
+	</bean>
+
+	<!-- This bean is configurable so it is specified directly in the XML configuration -->
+	<bean id="printer" class="org.example.spring.services.impl.PrefixedPrinter">
+		<property name="prefix" value="${prefix}" />
+	</bean>
+
+	<hz:client id="hazelcast-client" group-name="dev" group-password="dev-pass">
+    	<hz:members>127.0.0.1:5701</hz:members>
+	</hz:client>
+	
+	<hz:map id="values" instance-ref="hazelcast-client" name="values"/>
+
+	<bean id="store-value-action" class="org.example.spring.services.impl.StoreValueAction">
+		<constructor-arg ref="values"/>
+	</bean>
+
+	<bean id="dump-value-action" class="org.example.spring.services.impl.DumpValueAction">
+		<constructor-arg ref="printer"/>
+		<constructor-arg ref="stringFormatter"/>
+		<constructor-arg ref="values"/>
+	</bean>
+</beans>
