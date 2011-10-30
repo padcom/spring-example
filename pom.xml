@@ -18,7 +18,7 @@
 
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://jenkins.testdriven.org/job/spring-example-master</url>
+		<url>http://jenkins.testdriven.org/job/spring-example</url>
 	</ciManagement>
 
 	<issueManagement>
