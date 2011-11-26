@@ -21,14 +21,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>appassembler-maven-plugin</artifactId>
-				<configuration>
-					<programs>
-						<program>
-							<mainClass>org.example.gorm.Program</mainClass>
-							<name>example</name>
-						</program>
-					</programs>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
