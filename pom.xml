@@ -115,6 +115,7 @@
 
 	<modules>
 		<module>spring-console</module>
+		<module>spring-gorm</module>
 		<module>spring-mule</module>
 		<module>spring-hazelcast</module>
 		<module>spring-hazelcast2</module>
