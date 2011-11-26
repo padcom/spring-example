@@ -14,32 +14,28 @@
            http://grails.org/schema/gorm http://grails.org/schema/gorm/gorm.xsd">
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="url" value="jdbc:hsqldb:file:example"/>
+        <property name="url" value="jdbc:h2:example"/>
         <property name="password" value=""/>
         <property name="username" value="sa"/>
-        <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+        <property name="driverClassName" value="org.h2.Driver"/>
     </bean>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages" />
     </bean>
 
-    <gorm:sessionFactory base-package="org.grails.samples" data-source-ref="dataSource" message-source-ref="messageSource">
+    <gorm:sessionFactory base-package="org.example.gorm.domain" data-source-ref="dataSource" message-source-ref="messageSource">
         <property name="hibernateProperties">
             <util:map>
                 <entry key="hibernate.hbm2ddl.auto" value="update"/>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             </util:map>
         </property>
     </gorm:sessionFactory>
 
-	<context:component-scan base-package="org.example.spring.services" />
+	<context:component-scan base-package="org.example.gorm" />
 
     <context:annotation-config/>
     <context:mbean-export/>
     <tx:annotation-driven/>
-<!-- 
-    <bean name="example:type=HibernateStatistics" class="org.hibernate.jmx.StatisticsService">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
- -->
 </beans>
