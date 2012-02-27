@@ -1,16 +1,15 @@
 package org.example.spring.services.impl;
 
 import org.example.spring.services.Formatter;
-import org.springframework.stereotype.Component;
+
+import javax.inject.Named;
 
 /**
  * This is some formatter implemented using String.format method
  * 
- * It uses the Spring stereotype annotation 
- * 
  * @author Matthias Hryniszak
  */
-@Component
+@Named("string-formatter") // the string here is optional. Default: "stringFormatter"
 public class StringFormatter implements Formatter {
 	@Override
 	public String format(String template, Object... params) {

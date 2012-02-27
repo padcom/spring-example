@@ -14,5 +14,13 @@ public class Program {
 		//
 		Action action = context.getBean(Action.class);
 		action.execute("Hello, world!");
+
+		System.out.println();
+
+		// this is how you get the list of all beans in a context:
+		String[] beans = context.getBeanDefinitionNames();
+		for (String bean : beans) {
+			System.out.println(String.format("%s: %s", bean, context.getType(bean)));
+		}
 	}
 }

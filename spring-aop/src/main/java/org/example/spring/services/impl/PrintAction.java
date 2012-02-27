@@ -19,10 +19,12 @@ import org.example.spring.services.Printer;
 @Named 
 public class PrintAction implements Action {
 	private final Printer printer;
-	private final Formatter formatter;
 
-	@Inject
-	public PrintAction(Printer printer, Formatter formatter) {
+	@Inject // this field is injected - optional field
+	private Formatter formatter;
+
+	@Inject // this constructor will be used to inject must-have dependencies
+	public PrintAction(Printer printer) {
 		this.printer = printer;
 		this.formatter = formatter;
 	}
@@ -30,5 +32,10 @@ public class PrintAction implements Action {
 	@Override
 	public void execute(String data) {
 		printer.print(formatter.format("The message is %s", data));
+	}
+
+	public void setFormatter(Formatter formatter) {
+		System.out.println(String.format("PrintAction.setFormatter(%s)", formatter));
+		this.formatter = formatter;
 	}
 }

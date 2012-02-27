@@ -1,7 +1,6 @@
 package org.example.spring.services.impl;
 
 import org.example.spring.services.Printer;
-import org.springframework.beans.factory.annotation.Value;
 
 public class PrefixedPrinter implements Printer {
 	private String prefix;
