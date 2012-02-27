@@ -25,7 +25,7 @@ public class ExampleAspect {
 		System.out.println("ExampleAspect.after() - " + data);
 	}
 
-	// Pointcuts aren't necessary if we're don't want them. We can specify the expression directly
+	// Pointcuts aren't necessary if we don't want them. We can specify the expression directly
 	@Before("execution(* org.example.spring.services.Formatter.*(..)) && args(format,..)")
 	public void beforeFormat(String format) {
 		System.out.println("ExampleAspect.beforeFormat() - " + format);

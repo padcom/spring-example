@@ -31,5 +31,4 @@ public class PrintAction implements Action {
 	public void execute(String data) {
 		printer.print(formatter.format("The message is %s", data));
 	}
-
 }
