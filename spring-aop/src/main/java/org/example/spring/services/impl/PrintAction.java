@@ -26,7 +26,6 @@ public class PrintAction implements Action {
 	@Inject // this constructor will be used to inject must-have dependencies
 	public PrintAction(Printer printer) {
 		this.printer = printer;
-		this.formatter = formatter;
 	}
 
 	@Override

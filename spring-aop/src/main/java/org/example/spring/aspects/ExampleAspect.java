@@ -13,7 +13,7 @@ public class ExampleAspect {
 	// a Pointcut definition to be re-used later on in @Before and other advices
 	@Pointcut("execution(* org.example.spring.services.Printer.print(String)) && args(data)")
 	// pointcut definition (name and parameter list)
-	private void printActionExecutePointcut(String data) {}
+	protected void printActionExecutePointcut(String data) {}
 
 	@Before("printActionExecutePointcut(data)")
 	public void before(String data) {
